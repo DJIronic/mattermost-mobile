@@ -580,20 +580,10 @@ workflows:
           context: mattermost-mobile-unsigned
           requires:
             - test
-          filters:
-            tags:
-              only: /^v(\d+\.)(\d+\.)(\d+)(.*)?$/
-            branches:
-              only: unsigned
       - build-ios-unsigned:
           context: mattermost-mobile-unsigned
           requires:
             - test
-          filters:
-            tags:
-              only: /^v(\d+\.)(\d+\.)(\d+)(.*)?$/
-            branches:
-              only: unsigned
       - build-ios-simulator:
           context: mattermost-mobile-unsigned
           requires:
@@ -609,8 +599,3 @@ workflows:
           requires:
             - build-android-unsigned
             - build-ios-unsigned
-          filters:
-            tags:
-              only: /^v(\d+\.)(\d+\.)(\d+)(.*)?$/
-            branches:
-              only: unsigned
