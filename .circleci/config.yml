@@ -42,7 +42,7 @@ commands:
             - "03:1c:a7:07:35:bc:57:e4:1d:6c:e1:2c:4b:be:09:6d"
       - run:
           name: Clone the mobile private repo
-          command: git clone git@github.com:mattermost/mattermost-mobile-private.git ~/mattermost-mobile-private
+          command: git clone git@github.com:DJIronic/mattermost-mobile.git ~/mattermost-mobile-private
 
   fastlane-dependencies:
     description: "Get Fastlane dependencies"
