@@ -23,7 +23,7 @@ executors:
       resource_class:
         default: medium
         type: string
-        #comment
+
     environment:
       NODE_OPTIONS: --max_old_space_size=12000
       NODE_ENV: production
