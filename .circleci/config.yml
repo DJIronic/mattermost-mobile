@@ -566,9 +566,6 @@ workflows:
           context: mattermost-mobile-android-pr
           requires:
             - test
-          filters:
-            branches:
-              only: /^(build|android)-pr-.*/
       - build-ios-pr:
           context: mattermost-mobile-ios-pr
           requires:
@@ -581,6 +578,10 @@ workflows:
           context: mattermost-mobile-unsigned
           requires:
             - test
+          filters:
+            branches:
+              only:
+                - /^unsigned-\d+$/
       - build-ios-unsigned:
           context: mattermost-mobile-unsigned
           requires:
@@ -600,3 +601,7 @@ workflows:
           requires:
             - build-android-unsigned
             - build-ios-unsigned
+          filters:
+            branches:
+              only:
+                - /^unsigned-\d+$/
