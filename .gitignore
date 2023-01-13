@@ -7,7 +7,7 @@ mattermost.keystore
 tmp/
 .env
 env.d.ts
-
+fastlane/Gemfile.lock
 */**/compass-icons.ttf
 
 # OSX
