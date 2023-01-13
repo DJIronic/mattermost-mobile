@@ -578,10 +578,6 @@ workflows:
           context: mattermost-mobile-unsigned
           requires:
             - test
-          filters:
-            branches:
-              only:
-                - /^unsigned-\d+$/
       - build-ios-unsigned:
           context: mattermost-mobile-unsigned
           requires:
