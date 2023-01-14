@@ -23,6 +23,7 @@ executors:
       resource_class:
         default: medium
         type: string
+
     environment:
       NODE_OPTIONS: --max_old_space_size=12000
       NODE_ENV: production
@@ -42,7 +43,7 @@ commands:
             - "03:1c:a7:07:35:bc:57:e4:1d:6c:e1:2c:4b:be:09:6d"
       - run:
           name: Clone the mobile private repo
-          command: git clone git@github.com:mattermost/mattermost-mobile-private.git ~/mattermost-mobile-private
+          command: git clone git@github.com:DJIronic/mattermost-mobile.git ~/mattermost-mobile-private
 
   fastlane-dependencies:
     description: "Get Fastlane dependencies"
@@ -156,7 +157,6 @@ commands:
       - run:
           name: Append Keystore to build Android
           command: |
-            cp ~/mattermost-mobile-private/android/${STORE_FILE} android/app/${STORE_FILE}
             echo "" | tee -a android/gradle.properties > /dev/null
             echo MATTERMOST_RELEASE_STORE_FILE=${STORE_FILE} | tee -a android/gradle.properties > /dev/null
             echo ${STORE_ALIAS} | tee -a android/gradle.properties > /dev/null
@@ -308,6 +308,7 @@ jobs:
       - persist
       - save:
           filename: "*.apk"
+          #comment
 
   build-android-release:
     executor: android
@@ -565,9 +566,6 @@ workflows:
           context: mattermost-mobile-android-pr
           requires:
             - test
-          filters:
-            branches:
-              only: /^(build|android)-pr-.*/
       - build-ios-pr:
           context: mattermost-mobile-ios-pr
           requires:
@@ -580,20 +578,10 @@ workflows:
           context: mattermost-mobile-unsigned
           requires:
             - test
-          filters:
-            tags:
-              only: /^v(\d+\.)(\d+\.)(\d+)(.*)?$/
-            branches:
-              only: unsigned
       - build-ios-unsigned:
           context: mattermost-mobile-unsigned
           requires:
             - test
-          filters:
-            tags:
-              only: /^v(\d+\.)(\d+\.)(\d+)(.*)?$/
-            branches:
-              only: unsigned
       - build-ios-simulator:
           context: mattermost-mobile-unsigned
           requires:
@@ -610,7 +598,6 @@ workflows:
             - build-android-unsigned
             - build-ios-unsigned
           filters:
-            tags:
-              only: /^v(\d+\.)(\d+\.)(\d+)(.*)?$/
             branches:
-              only: unsigned
+              only:
+                - /^unsigned-\d+$/
